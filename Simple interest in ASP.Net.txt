@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace simple_interest
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            int p = int.Parse(princi.Text);
+            int n = int.Parse(year.Text);
+            int r = int.Parse(rate.Text);
+            int SI = (p * n * r) / 100;
+            Label4.Text = "The Simple Interest is: "+SI;
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            int p = int.Parse(princi.Text);
+            int r = int.Parse(rate.Text);
+            int final;
+            final = p + r;
+            Label5.Text = "The Final Amount is: " + final;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="simple_interest.WebForm1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+//Simple interest in ASP.Net
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:Label ID="Label1" runat="server" Text="Enter Principle Amount:     "></asp:Label>
+    <asp:TextBox ID="princi" runat="server"></asp:TextBox>
+    <div>
+    
+    </div>
+    <asp:Label ID="Label2" runat="server" Text="Enter Interest Rate :       "></asp:Label>
+    <asp:TextBox ID="rate" runat="server"></asp:TextBox>
+    <p>
+        <asp:Label ID="Label3" runat="server" Text="Enter No: of Years:    "></asp:Label>
+        <asp:TextBox ID="year" runat="server" style="width: 128px"></asp:TextBox>
+    </p>
+    <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
+        Text="Calculate Interest" Width="201px" />
+    <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
+        Text="Final Amount" Width="245px" />
+    <p>
+        <asp:Label ID="Label4" runat="server"></asp:Label>
+    </p>
+    <p>
+        <asp:Label ID="Label5" runat="server"></asp:Label>
+    </p>
+    </form>
+</body>
+</html>

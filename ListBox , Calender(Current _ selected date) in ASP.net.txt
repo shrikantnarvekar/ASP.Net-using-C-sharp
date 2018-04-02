@@ -1,0 +1,153 @@
+//Login(Reset & Submit), ListBox , Calender(Current & selected date) in ASP.net
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace login_view_state
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            current_date.Text ="Your current date is: " +DateTime.Now.ToString();
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            user_valid.ForeColor = System.Drawing.Color.Red;
+            pass_valid.ForeColor = System.Drawing.Color.Red;
+            if (ViewState["name"] != null && ViewState["pass"] != null)
+            {
+                username.Text=ViewState["name"].ToString();
+                password.Text = ViewState["pass"].ToString();
+            }
+            if(ViewState["name"] == null)
+            {
+                user_valid.Text = "Invalid Username";  
+            }
+            if (ViewState["pass"] == null)
+            {
+                pass_valid.Text = "Invalid Password";
+
+            }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            ViewState["name"]=username.Text;
+            ViewState["pass"]=password.Text;
+            username.Text = String.Empty;
+            password.Text = String.Empty;
+            user_valid.Text = String.Empty;
+            pass_valid.Text = String.Empty;
+
+        }
+
+        protected void icecream_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (icecream.SelectedValue == "Select Flavor") {
+                flavor_label.Text = "";
+            }
+            if(icecream.SelectedValue=="Chocolate"){
+                flavor_label.Text = "This is a chocolate flavor";
+                flavor_label.ForeColor = System.Drawing.Color.Brown;
+           }
+            if (icecream.SelectedValue == "Tender Coconut")
+            {
+                flavor_label.Text = "Ek number ice hai re Naturals ka";
+                flavor_label.ForeColor = System.Drawing.Color.Green;
+            }
+            if (icecream.SelectedValue == "Choco walnut")
+            {
+                flavor_label.Text = "Mast hai bas try karo ";
+                flavor_label.ForeColor = System.Drawing.Color.Brown;
+            }
+            if (icecream.SelectedValue == "Sitafal")
+            {
+                flavor_label.Text = "Very limited";
+                flavor_label.ForeColor = System.Drawing.Color.Green;
+            }
+        }
+
+        protected void calender_SelectionChanged(object sender, EventArgs e)
+        {
+            birth_date.Text = "Your Birth date is : " + calender1.SelectedDate.ToShortDateString();
+
+        }
+    }
+}
+
+
+
+
+
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="login_view_state.WebForm1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:Label ID="Label1" runat="server" Height="30px" Text="Username" 
+        Width="208px"></asp:Label>
+    <asp:TextBox ID="username" runat="server" Height="23px" Width="147px"></asp:TextBox>
+    <asp:Label ID="user_valid" runat="server"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br />
+    <div>
+    
+        <asp:Label ID="Label2" runat="server" Text="Password"></asp:Label>
+        <asp:TextBox ID="password" runat="server" Height="24px" 
+            style="margin-left: 149px" TextMode="Password" Width="148px"></asp:TextBox>
+        <asp:Label ID="pass_valid" runat="server"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br />
+        <br />
+    
+    </div>
+    <asp:Button ID="Button1" runat="server" Height="30px" onclick="Button1_Click" 
+        Text="Submit" Width="172px" />
+    <asp:Button ID="Button2" runat="server" Height="30px" onclick="Button2_Click" 
+        style="margin-left: 180px" Text="Reset" Width="178px" />
+    <p>
+        <asp:Label ID="flavor_label" runat="server"></asp:Label>
+    </p>
+    <asp:ListBox ID="icecream" runat="server" AutoPostBack="True" Height="86px" 
+        onselectedindexchanged="icecream_SelectedIndexChanged" Width="165px">
+        <asp:ListItem Selected="True">Select Flavor</asp:ListItem>
+        <asp:ListItem>Chocolate</asp:ListItem>
+        <asp:ListItem>Choco walnut</asp:ListItem>
+        <asp:ListItem>Tender Coconut</asp:ListItem>
+        <asp:ListItem>Sitafal</asp:ListItem>
+    </asp:ListBox>
+    <br />
+    <br />
+    <asp:Calendar ID="calender1" runat="server" BackColor="White" 
+        BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" 
+        ForeColor="#9900CC" Height="190px" NextPrevFormat="FullMonth" 
+        onselectionchanged="calender_SelectionChanged" Width="350px">
+        <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+        <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" 
+            VerticalAlign="Bottom" />
+        <OtherMonthDayStyle ForeColor="#999999" />
+        <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+        <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" 
+            Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
+        <TodayDayStyle BackColor="#CCCCCC" />
+    </asp:Calendar>
+    <asp:Label ID="current_date" runat="server"></asp:Label>
+    <br />
+    <asp:Label ID="birth_date" runat="server"></asp:Label>
+    <br />
+    </form>
+</body>
+</html>

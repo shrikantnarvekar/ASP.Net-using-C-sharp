@@ -1,0 +1,61 @@
+//Sum of Digit in ASP.net
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication7
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            int a = int.Parse(txt1.Text);
+            int sum=0,n;
+            while (a > 0) {
+                n = a % 10;
+                sum = sum + n;
+                a = a / 10;
+            
+            }
+            Label2.Text = "The Sum of Digit is : "+sum;
+
+        }
+    }
+}
+
+
+
+
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication7.WebForm1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    
+    </div>
+    <asp:Label ID="Label1" runat="server" Text="Enter an Integer:        "></asp:Label>
+    <asp:TextBox ID="txt1" runat="server"></asp:TextBox>
+    <p>
+        <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Button" 
+            Width="229px" />
+    </p>
+    <asp:Label ID="Label2" runat="server"></asp:Label>
+    </form>
+</body>
+</html>

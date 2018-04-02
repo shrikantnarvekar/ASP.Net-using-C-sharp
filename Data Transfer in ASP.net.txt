@@ -1,0 +1,218 @@
+//Data Transfer in ASP.net
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Movie_theater
+{
+    public partial class first_page : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void search_btn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("second_page.aspx");
+            
+        }
+
+        protected void theater_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(theater_list.SelectedValue=="Fun Cinemas"){
+                Session["theater_name"] = "Fun Cinemas";
+                Session["movie_name"] = "Maze Runner: The Death Cure";
+                Session["timings"] = "10:50 AM, 01:30 PM, 03:45 PM, 06:30 PM";
+                Session["food"] = "Snacks and Cold Beverages";
+
+                Session["theater_name0"] = "Fun Cinemas";
+                Session["movie_name0"] = "PADMAN";
+                Session["timings0"] = "10:50 AM, 01:30 PM, 03:45 PM, 06:30 PM";
+                Session["food0"] = "Snacks and Cold Beverages";
+
+                Session["theater_name1"] = "Fun Cinemas";
+                Session["movie_name1"] = "Black Panther";
+                Session["timings1"] = "10:50 AM, 01:30 PM, 03:45 PM, 06:30 PM";
+                Session["food1"] = "Snacks and Cold Beverages";
+
+            }
+            if (theater_list.SelectedValue == "IMAX")
+            {
+                Session["theater_name"] = "IMAX";
+                Session["movie_name"] = "PADMAVAT";
+                Session["timings"] = "10:50 AM, 01:30 PM, 03:45 PM, 06:30 PM";
+                Session["food"] = "All Kind of Food";
+
+                Session["theater_name0"] = "IMAX";
+                Session["movie_name0"] = "PADMAN";
+                Session["timings0"] = "10:50 AM, 01:30 PM, 03:45 PM, 06:30 PM";
+                Session["food0"] = "All Kind of Food";
+
+                Session["theater_name1"] = "IMAX";
+                Session["movie_name1"] = "Batman 2018";
+                Session["timings1"] = "10:50 AM, 01:30 PM, 03:45 PM, 06:30 PM";
+                Session["food1"] = "All Kind of Food";
+            }
+            if (theater_list.SelectedValue == "Big Cinemas")
+            {
+                Session["theater_name"] = "Big Cinemas";
+                Session["movie_name"] = "The Lion King: Incarnated";
+                Session["timings"] = "10:50 AM, 01:30 PM, 03:45 PM, 06:30 PM";
+                Session["food"] = "All Kind of Food";
+
+                Session["theater_name0"] = "Big Cinemas";
+                Session["movie_name0"] = "PADMAN";
+                Session["timings0"] = "10:50 AM, 01:30 PM, 03:45 PM, 06:30 PM";
+                Session["food0"] = "All Kind of Food";
+
+                Session["theater_name1"] = "Big Cinemas";
+                Session["movie_name1"] = "The Amazing SpiderMan 2";
+                Session["timings1"] = "10:50 AM, 01:30 PM, 03:45 PM, 06:30 PM";
+                Session["food1"] = "All Kind of Food";
+            }
+        }
+    }
+}
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Movie_theater
+{
+    public partial class second_page : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            String TN = (String)(Session["theater_name"]);
+            String  MN= (String)(Session["movie_name"]);
+            String T = (String)(Session["timings"]);
+            String F = (String)(Session["food"]);
+            theater_name.Text=TN;
+            movie_name.Text = MN;
+            Timings.Text = T;
+            food.Text = F;
+
+            String TN0 = (String)(Session["theater_name0"]);
+            String MN0 = (String)(Session["movie_name0"]);
+            String T0 = (String)(Session["timings0"]);
+            String F0 = (String)(Session["food0"]);
+            theater_name0.Text = TN0;
+            movie_name0.Text = MN0;
+            Timings0.Text = T0;
+            food0.Text = F0;
+
+            String TN1 = (String)(Session["theater_name1"]);
+            String MN1 = (String)(Session["movie_name1"]);
+            String T1 = (String)(Session["timings1"]);
+            String F1 = (String)(Session["food1"]);
+            theater_name1.Text = TN1;
+            movie_name1.Text = MN1;
+            Timings1.Text = T1;
+            food1.Text = F1;
+        }
+
+    }
+}
+
+
+
+
+
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="first_page.aspx.cs" Inherits="Movie_theater.first_page" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    
+    </div>
+    <asp:ListBox ID="theater_list" runat="server" AutoPostBack="True" 
+        Height="118px" onselectedindexchanged="theater_list_SelectedIndexChanged" 
+        Width="161px">
+        <asp:ListItem Selected="True">Select Theater</asp:ListItem>
+        <asp:ListItem>Fun Cinemas</asp:ListItem>
+        <asp:ListItem>IMAX</asp:ListItem>
+        <asp:ListItem>Big Cinemas</asp:ListItem>
+    </asp:ListBox>
+    <p>
+        <asp:Button ID="search_btn" runat="server" onclick="search_btn_Click" 
+            Text="Search Movies" Width="157px" />
+    </p>
+    </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="second_page.aspx.cs" Inherits="Movie_theater.second_page" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    
+    </div>
+    <asp:Label ID="theater_name" runat="server"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="movie_name" runat="server"></asp:Label>
+    <p>
+        <asp:Label ID="Timings" runat="server"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="food" runat="server"></asp:Label>
+    </p>
+    <p>
+        &nbsp;</p>
+    <asp:Label ID="theater_name0" runat="server"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="movie_name0" runat="server"></asp:Label>
+    <p>
+        <asp:Label ID="Timings0" runat="server"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="food0" runat="server"></asp:Label>
+    </p>
+    <p>
+        &nbsp;</p>
+    <asp:Label ID="theater_name1" runat="server"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="movie_name1" runat="server"></asp:Label>
+    <p>
+        <asp:Label ID="Timings1" runat="server"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="food1" runat="server"></asp:Label>
+    </p>
+    <p>
+        &nbsp;</p>
+    </form>
+</body>
+</html>
